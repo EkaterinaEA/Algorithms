@@ -15,6 +15,30 @@ public class ReferenceBook<K, V> {
         threshold = hashTable.length * 0.75f;
     }
 
+    public boolean insert(final K key, final V value){
+        if (size+1 >= threshold){                            // if the table is overloaded
+            threshold*=2;
+            arrayDoubling();
+        }
+
+        Node<K, V> newNode = new Node<>(key, value);
+        int index = hash(key);
+
+        if (hashTable[index] == null){
+            return simpleAdd(index, newNode);
+        }
+
+        List <Node<K, V>> nodeList = hashTable[index].getNodes();
+
+        for (Node<K, V> node : nodeList){
+            if (keyExistButValueNew(node, newNode, value) ||
+            collisionProcessing(node, newNode, nodeList)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     private boolean simpleAdd(int index, Node<K, V> newNode){
         hashTable[index] = new Node<>(null, null);
         hashTable[index].getNodes().add(newNode);
