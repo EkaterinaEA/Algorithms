@@ -4,11 +4,25 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
-public class RedefinitionEqualsAndHashCode<K, V> {
+public class ReferenceBook<K, V> {
 
     private Node<K,V> [] hashTable;
     private int size = 0;
     private float threshold;   // предел
+
+    public void add(K key, V value){
+        Node<K, V> newNode = new Node(key, value);
+    }
+
+    private int hash(Node<K, V> node){
+        return node.hashCode() % hashTable.length;
+    }
+
+    private int hash(final K key){
+        int hash = 17;
+        hash = hash*31 + key.hashCode();
+        return hash % hashTable.length;
+    }
 
     private class Node<K, V> {
         private List<Node<K,V>> nodes;
