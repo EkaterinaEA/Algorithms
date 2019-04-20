@@ -34,6 +34,22 @@ public class ReferenceBook<K, V> {
         return false;
     }
 
+    private boolean collisionProcessing(
+            final Node<K, V> nodeFromList,
+            final Node<K, V> newNode,
+            final List<Node<K, V>> nodes) {
+
+        if (newNode.hashCode() == nodeFromList.hashCode() &&
+                !Objects.equals(newNode.key, nodeFromList.key) &&
+                !Objects.equals(newNode.value, nodeFromList.value)
+        ) {
+            nodes.add(newNode);
+            size++;
+            return true;
+        }
+        return false;
+    }
+
 
     public void add(K key, V value){
         Node<K, V> newNode = new Node(key, value);
