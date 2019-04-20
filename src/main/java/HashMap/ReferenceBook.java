@@ -15,6 +15,13 @@ public class ReferenceBook<K, V> {
         threshold = hashTable.length * 0.75f;
     }
 
+    private boolean simpleAdd(int index, Node<K, V> newNode){
+        hashTable[index] = new Node<>(null, null);
+        hashTable[index].getNodes().add(newNode);
+        size++;
+        return true;
+    }
+
     public void add(K key, V value){
         Node<K, V> newNode = new Node(key, value);
     }
