@@ -8,7 +8,12 @@ public class ReferenceBook<K, V> {
 
     private Node<K,V> [] hashTable;
     private int size = 0;
-    private float threshold;   // предел
+    private float threshold;   // degree of load / степень нагрузки
+
+    public ReferenceBook() {
+        hashTable = new Node[16];
+        threshold = hashTable.length * 0.75f;
+    }
 
     public void add(K key, V value){
         Node<K, V> newNode = new Node(key, value);
