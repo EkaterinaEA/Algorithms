@@ -22,6 +22,19 @@ public class ReferenceBook<K, V> {
         return true;
     }
 
+    private boolean keyExistButValueNew(
+            final Node<K, V> nodeFromList,
+            final Node<K, V> newNode,
+            final V value) {
+        if (newNode.getKey().equals(nodeFromList.getKey()) &&
+        !newNode.getValue().equals(nodeFromList.getValue())){
+            nodeFromList.setValue(value);
+            return true;
+        }
+        return false;
+    }
+
+
     public void add(K key, V value){
         Node<K, V> newNode = new Node(key, value);
     }
