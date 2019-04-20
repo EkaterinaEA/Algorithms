@@ -50,6 +50,19 @@ public class ReferenceBook<K, V> {
         return false;
     }
 
+    private void arrayDoubling(){          // cell redistribution / перераспределение элементов в ячейки
+        Node<K, V>[] oldHashTable = hashTable;
+        hashTable = new Node[oldHashTable.length * 2];
+        size = 0;
+        for (Node<K, V> node : oldHashTable){
+            if (node != null){
+                for (Node<K, V> n : node.getNodes()){
+                    insert(n.key, n.value);
+                }
+            }
+        }
+    }
+
 
     public void add(K key, V value){
         Node<K, V> newNode = new Node(key, value);
