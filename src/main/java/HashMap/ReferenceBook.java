@@ -66,13 +66,28 @@ public class ReferenceBook<K, V> implements Book<K,V> {
     }
 
     @Override
-    public V get(K key) {
+    public V get(final K key) {
+        int index = hash(key);
+        if (index < hashTable.length &&
+        hashTable[index] != null){
+
+            if (hashTable[index].getNodes().size() == 1){
+                return hashTable[index].getNodes().get(0).getValue();
+            }
+
+            List <Node<K, V>> nodeList = hashTable[index].getNodes();
+            for (Node<K, V> node : nodeList){
+                if (key.equals(node.getKey())) {
+                    return node.getValue();
+                }
+            }
+        }
         return null;
     }
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     private boolean simpleAdd(int index, Node<K, V> newNode){
