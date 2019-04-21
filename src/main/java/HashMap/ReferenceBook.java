@@ -1,10 +1,11 @@
 package HashMap;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
-public class ReferenceBook<K, V> {
+public class ReferenceBook<K, V> implements Book<K,V> {
 
     private Node<K,V> [] hashTable;
     private int size = 0;
@@ -15,6 +16,7 @@ public class ReferenceBook<K, V> {
         threshold = hashTable.length * 0.75f;
     }
 
+    @Override
     public boolean insert(final K key, final V value){
         if (size+1 >= threshold){                            // if the table is overloaded
             threshold*=2;
@@ -37,6 +39,40 @@ public class ReferenceBook<K, V> {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean delete(final K key) {
+        int index = hash(key);
+
+        if (hashTable[index] == null){
+            return false;
+        }
+
+        if (hashTable[index].getNodes().size() == 1){
+            hashTable[index] = null;
+            return true;
+        }
+
+        List <Node<K, V>> nodeList = hashTable[index].getNodes();
+
+        for (Node<K, V> node : nodeList){
+            if (key.equals(node.getKey())){
+                nodeList.remove(node);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public V get(K key) {
+        return null;
+    }
+
+    @Override
+    public int size() {
+        return 0;
     }
 
     private boolean simpleAdd(int index, Node<K, V> newNode){
@@ -88,6 +124,7 @@ public class ReferenceBook<K, V> {
     }
 
 
+
     public void add(K key, V value){
         Node<K, V> newNode = new Node(key, value);
     }
@@ -100,6 +137,11 @@ public class ReferenceBook<K, V> {
         int hash = 17;
         hash = hash*31 + key.hashCode();
         return hash % hashTable.length;
+    }
+
+    @Override
+    public Iterator<V> iterator() {
+        return null;
     }
 
     private class Node<K, V> {
