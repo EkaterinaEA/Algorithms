@@ -7,6 +7,46 @@ import java.util.Objects;
 
 public class ReferenceBook<K, V> implements Book<K,V> {
 
+    public static void main(String[] args) {
+        ReferenceBook<String, String> strings = new ReferenceBook<>();
+
+        strings.insert("1", "2");
+        System.out.println(strings.get("1"));
+
+        strings.insert("1", "3");
+        System.out.println(strings.get("1"));
+
+        strings.insert("2", "3");
+        System.out.println(strings.size());
+
+        strings.delete("1");
+        System.out.println(strings.get("1"));
+
+
+        // test for the arrayDoubling():
+        strings.insert("3", "3");
+        strings.insert("4", "4");
+        strings.insert("5", "5");
+        strings.insert("6", "6");
+        strings.insert("7", "7");
+        strings.insert("8", "8");
+        strings.insert("9", "9");
+        strings.insert("10", "10");
+        strings.insert("11", "11");
+        strings.insert("12", "12");
+        strings.insert("13", "13");
+        strings.insert("14", "14");
+        strings.insert("15", "hello!");
+        strings.insert("16", "16");
+        strings.insert("17", "17");
+        strings.insert("18", "18");
+
+        System.out.println(strings.size());
+        System.out.println(strings.get("15"));
+        System.out.println(strings.hashTable.length);
+
+    }
+
     private Node<K,V> [] hashTable;
     private int size = 0;
     private float threshold;   // degree of load / степень нагрузки
@@ -137,8 +177,6 @@ public class ReferenceBook<K, V> implements Book<K,V> {
             }
         }
     }
-
-
 
     public void add(K key, V value){
         Node<K, V> newNode = new Node(key, value);
