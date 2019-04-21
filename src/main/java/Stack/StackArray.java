@@ -18,7 +18,7 @@ public class StackArray {
 
     public void push(int a){
         try {
-            if ((top++)>=size){
+            if ((top+1)>=size){
                 System.out.println("Array is full");
             }
             int i = ++top;
