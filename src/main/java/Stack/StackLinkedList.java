@@ -26,18 +26,18 @@ public class StackLinkedList<E> implements StackLinked<E>, Iterable<E>, Descendi
                 size++;
         }
 
-        public Node<E> pop(){
+        public E pop(){
                 if (isEmpty()) {
                         System.out.println("List is empty");
                 }
                 Node<E> lastFirst = firstNode;
                 firstNode = firstNode.getNextElement();
                 size --;
-                return lastFirst.getNextElement();
+                return lastFirst.getNextElement().getCurrentElement();
         }
 
-        public Node<E> peek(){
-                return firstNode.getNextElement();
+        public E peek(){
+                return firstNode.getNextElement().getCurrentElement();
         }
 
         @Override
