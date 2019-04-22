@@ -18,7 +18,7 @@ public class StackLinkedList<E> implements StackLinked<E>, Iterable<E>, Descendi
         }
 
         @Override
-        public void addFirst(E e) {
+        public void push(E e) {
                 Node<E> next = firstNode;
                 next.setCurrentElement(e);
                 firstNode = new Node<E>(null, next, null);
@@ -26,13 +26,18 @@ public class StackLinkedList<E> implements StackLinked<E>, Iterable<E>, Descendi
                 size++;
         }
 
-        @Override
-        public void addLast(E e) {
-                Node<E> prev = lastNode;
-                prev.setCurrentElement(e);
-                lastNode = new Node<E>(null, null, prev);
-                prev.setNextElement(prev);
-                size++;
+        public Node<E> pop(){
+                if (isEmpty()) {
+                        System.out.println("List is empty");
+                }
+                Node<E> lastFirst = firstNode;
+                firstNode = firstNode.getNextElement();
+                size --;
+                return lastFirst.getNextElement();
+        }
+
+        public Node<E> peek(){
+                return firstNode.getNextElement();
         }
 
         @Override
@@ -41,13 +46,51 @@ public class StackLinkedList<E> implements StackLinked<E>, Iterable<E>, Descendi
         }
 
         @Override
-        public Iterator<E> descendingIterator() {
-                return null;
+        public boolean isEmpty(){
+                return size == 0;
         }
 
         @Override
         public Iterator<E> iterator() {
-                return null;
+                return new Iterator<E>() {
+                        int counter = 0;
+                        @Override
+                        public boolean hasNext() {
+                                return counter < size;
+                        }
+
+                        @Override
+                        public E next() {
+                                return null;
+                        }
+
+                        @Override
+                        public void remove() {
+
+                        }
+                };
+        }
+
+        @Override
+        public Iterator<E> descendingIterator() {
+                return new Iterator<E>() {
+                        int counter = size - 1;
+
+                        @Override
+                        public boolean hasNext() {
+                                return counter >= 0;
+                        }
+
+                        @Override
+                        public E next() {
+                                return null;
+                        }
+
+                        @Override
+                        public void remove() {
+
+                        }
+                };
         }
 
         private class Node<E>{
