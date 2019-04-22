@@ -1,9 +1,6 @@
 package Stack;
 
 import LinkedList.DescendingIterator;
-import LinkedList.Linked;
-
-import javax.xml.soap.Node;
 import java.util.Iterator;
 
 public class StackLinkedList<E> implements StackLinked<E>, Iterable<E>, DescendingIterator<E> {
@@ -129,7 +126,4 @@ public class StackLinkedList<E> implements StackLinked<E>, Iterable<E>, Descendi
                         this.prevElement = prevElement;
                 }
         }
-
-
-
 }
