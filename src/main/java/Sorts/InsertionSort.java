@@ -17,33 +17,16 @@ public class InsertionSort {
 
     }
 
-    public static void sort(int[] items){
-        int sortedRangeEndIndex = 1;
-        while (sortedRangeEndIndex < items.length){
-            if (items[sortedRangeEndIndex - 1] > items[sortedRangeEndIndex]){
-                int insertIndex = findInsertionIndex(items, items[sortedRangeEndIndex]);
-                insert(items, insertIndex, sortedRangeEndIndex);
+    static void sort(int[] array){
+        for (int i = 1; i < array.length; ++i){
+            int key = array[i];
+            int j = i - 1;
+
+            while (j>=0 && array[j] > key){
+                array[j+1] = array[j];
+                j = j - 1;
             }
-            sortedRangeEndIndex++;
+            array[j + 1] = key;
         }
-    }
-
-    private static int findInsertionIndex(int[] items, int valueToInsert){
-        for (int i = 0; i < items.length; i++){
-            if (items[i] > items[valueToInsert]){
-                return i;
-            }
-        }
-        return 0;
-    }
-
-    private static void insert(int[] items, int indexInsertingAt, int indexInsertingFrom){
-        int temp = items[indexInsertingAt];
-        items[indexInsertingAt] = items[indexInsertingFrom];
-
-        for (int i = indexInsertingFrom; i > indexInsertingAt; i--){
-            items[i] = items[i-1];
-        }
-        items[indexInsertingAt+1] = temp;
     }
 }
