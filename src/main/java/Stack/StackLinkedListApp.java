@@ -6,6 +6,7 @@ public class StackLinkedListApp<E> {
 
         StackLinkedList<String> stackLinkedList = new StackLinkedList<String>();
 
+        System.out.println(stackLinkedList.peek());
         System.out.println(stackLinkedList.isEmpty());
         System.out.println(stackLinkedList.size());
 
